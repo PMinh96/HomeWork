@@ -1,16 +1,15 @@
-﻿using static Homework.Common.Utils.AppUtlis;
+﻿
+using static Homework.Common.Utils.AppUtlis;
 namespace Homework.Common.Helpers
 {
-    public static class SelectProduct
+    internal class SelectBrand
     {
-        public static void Products()
+        public static void Brands()
         {
-            
             Console.WriteLine("===================================================================");
             Console.WriteLine("1.");
             Console.WriteLine("2.");
-            Console.WriteLine("3.");
-            var option = GetValueFromKeyboard("Nhap lua chon: "); 
+            var option = GetValueFromKeyboard("Nhap lua chon: ");
             int optionConverted = Convert.ToInt32(option);
             switch (optionConverted)
             {

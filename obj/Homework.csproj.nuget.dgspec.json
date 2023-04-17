@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hoang\\source\\repos\\test\\test\\Homework.csproj": {}
+    "C:\\Users\\hoang\\OneDrive\\Máy tính\\HomeWork\\Homework.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hoang\\source\\repos\\test\\test\\Homework.csproj": {
+    "C:\\Users\\hoang\\OneDrive\\Máy tính\\HomeWork\\Homework.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hoang\\source\\repos\\test\\test\\Homework.csproj",
+        "projectUniqueName": "C:\\Users\\hoang\\OneDrive\\Máy tính\\HomeWork\\Homework.csproj",
         "projectName": "Homework",
-        "projectPath": "C:\\Users\\hoang\\source\\repos\\test\\test\\Homework.csproj",
+        "projectPath": "C:\\Users\\hoang\\OneDrive\\Máy tính\\HomeWork\\Homework.csproj",
         "packagesPath": "C:\\Users\\hoang\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hoang\\source\\repos\\test\\test\\obj\\",
+        "outputPath": "C:\\Users\\hoang\\OneDrive\\Máy tính\\HomeWork\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hoang\\AppData\\Roaming\\NuGet\\NuGet.Config",

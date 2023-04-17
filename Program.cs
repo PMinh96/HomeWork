@@ -36,7 +36,7 @@ namespace Homework
             switch (optionConverted)
             {
                 case 1:
-                    SelectProduct.Products();
+                    ProductController.Run();
                     break;
                 case 2:
                     SelectBrand.Brands();

@@ -22,7 +22,9 @@ namespace Homework.Services.Implements
 
         public void Find()
         {
-            throw new NotImplementedException();
+            var find = Products.Where(x => x.Price == 5000).ToList();
+            foreach (var product in find)
+                Console.WriteLine($"{product.Name}, {product.Id}");
         }
 
         public void FindConditions()
