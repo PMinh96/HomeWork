@@ -7,7 +7,12 @@ namespace Homework.Services.Interfaces
         void Sum();
         void FindConditions();
         void Find();
-        void Arrangement();
+        void FindGreaterThan();
+        void FindProviso();
+        void Asc();
+        void Desc();
+        void ProductDetail();
+        void SelectBrand();
 
     }
 }
