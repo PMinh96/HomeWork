@@ -1,18 +1,32 @@
 ﻿
+using System.Collections.Generic;
+using Homework.Models;
 
 namespace Homework.Services.Interfaces
 {
     interface IProductService
     {
-        void Sum();
-        void FindConditions();
-        void Find();
-        void FindGreaterThan();
+        void PrintInfo(List<ProductModel> products );
+        
+        // đếm hàng theo hãng 
+        List<ProductModel> SumProducts(decimal Operator, decimal price);
+
+        List<ProductModel> SingleComperator(string Operator, decimal price);
+        //List<ProductModel> SingleComperator(string Operator, decimal price, decimal pricel);
+
         void FindProviso();
-        void Asc();
-        void Desc();
+
+        // định nghĩa list sắp xếp
+        List<ProductModel> OrderByProducts(bool asc);
+
+        
+
+
+
         void ProductDetail();
+
         void SelectBrand();
+
 
     }
 }

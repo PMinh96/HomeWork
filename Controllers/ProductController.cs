@@ -1,4 +1,6 @@
-﻿using Homework.Services.Implements;
+﻿using Homework.Models;
+using Homework.Services.Implements;
+using System.Linq.Expressions;
 using static Homework.Common.Utils.AppUtlis;
 namespace Homework.Common.Helpers
 {
@@ -16,39 +18,51 @@ namespace Homework.Common.Helpers
             Console.WriteLine("6.sản phẩm");
             Console.WriteLine("tổng tiền");
             var option = GetValueFromKeyboard("Nhap lua chon: ");
+            
+
             int optionConverted = Convert.ToInt32(option);
-            ProductService Product = new ProductService();
+
+            ProductService productService = new ProductService();
+            var products = new List<ProductModel>();
             switch (optionConverted)
             {
                 case 1:
-                    Console.WriteLine("===================================================================");
-                    
-                    Product.Find();
-                    
-                    break;
-                case 2:
-                    Console.WriteLine("===================================================================");
-                    Product.FindProviso();
-                    break;
-                case 3:
-                    Product.Sum();
-                    break;
+                    var value = GetValueFromKeyboard("nhập: ");
+                    var valueArr = value.Split(",");
+                    var value01 = decimal.Parse(valueArr[1]);
+                    //var value02 = decimal.Parse(valueArr[2]);
 
+                    Console.WriteLine("===================================================================");
+                    products = productService.SingleComperator(valueArr[0], value01);
+                    //products = productService.SingleComperator(valueArr[0], value01, value02);
+
+                    productService.PrintInfo(products); 
+                    break;
                 case 4:
                     Console.WriteLine("===================================================================");
-                    Product.Asc();
+                    products = productService.OrderByProducts(true);
+                    productService.PrintInfo(products);
+
+                    break;
                     break;
                 case 5:
                     Console.WriteLine("===================================================================");
-                    Product.Desc();
+                    products = productService.OrderByProducts(false);
+                    productService.PrintInfo(products);
                     break;
                 case 6:
                     Console.WriteLine("===================================================================");
-                    Product.ProductDetail();
+                    productService.ProductDetail();
                     break;
                 case 7:
+                    var valueS = GetValueFromKeyboard("nhập:1 ");
+                    var value1 = decimal.Parse(valueS);
+                    var value2 = GetValueFromKeyboard(" nhập số 2: ");
+                    var valueX = decimal.Parse(value2);
+
+
                     Console.WriteLine("===================================================================");
-                    Product.Desc();
+                    products = productService.SumProducts(value1, valueX);
                     break;
 
                 default:
