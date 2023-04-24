@@ -3,20 +3,14 @@ using static Homework.Data.ProductsLists;
 using Homework.Services.Interfaces;
 using static Homework.Data.BrandList;
 using Homework.Models;
-using System.Linq.Expressions;
-using System.Diagnostics;
-using System.Collections.Generic;
-using System.Linq;
+using Homework.Dto;
+using Homework.Data;
 
 namespace Homework.Services.Implements
 {
     public class ProductService : IProductService
     {
 
-        public void Arrangement()
-        {
-            throw new NotImplementedException();
-        }
         public List<ProductModel> OrderByProducts(bool _asc)
         {
             return _asc ? Products.OrderBy(x => x.Price).ToList() : Products.OrderByDescending(x => x.Price).ToList();
@@ -58,39 +52,6 @@ namespace Homework.Services.Implements
 
         }
 
-        public void ProductDetail()
-        {
-            //var result = from p in Products
-            //             join b in Brands on p.BrandId equals b.Id
-            //             group p by p.Name into g
-            //             select new
-            //             {
-            //                 Name = g.Key,
-            //                 brandName = b.Name,
-            //             };
-
-            //foreach (var item in result)
-            //{
-            //    Console.WriteLine(item.ToString());
-            //}
-        }
-
-        public void SelectBrand()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Sum()
-        {
-           
-
-            //foreach (var item in result)
-            //{
-            //    Console.WriteLine(item.ToString());
-            //}
-
-        }
-
         public void PrintInfo(List<ProductModel> products)
         {
             foreach (var item in products)
@@ -99,17 +60,67 @@ namespace Homework.Services.Implements
             }
         }
 
-        public List<ProductModel> SumProducts(decimal Operator, decimal price)
+        public List<Productdto> SumProducts(decimal Operator, decimal price)
         {
             var result = from p in Products
                          where p.Price >= Operator && p.Price <= price
                          group p by p.Name into g
-                         select new
+                         select new Productdto
                          {
                              Name = g.Key,
                              Count = g.Count()
                          };
-            return  ProductModel(result);
+            return result.ToList();
+        }
+
+        public bool InsertProduct(ProductModel product)
+        {
+            Products.Add(product);
+
+            return Find(product.Id) != null;
+        }
+
+        public bool DeleteProduct(ProductModel product)
+        {
+            Products.RemoveAll(r => r.Id == product.Id);
+
+            return Find(product.Id) == null;
+
+        }
+
+        public bool UpdateProduct(ProductModel product)
+        {
+            var found = Find(product.Id);
+            if (found == null)
+            {
+                return false;
+            }
+            else
+            {
+                found.Price = product.Price;
+                if (product.Price == found.Price)
+                {
+                    return true;
+                }
+                else { return false; }
+            }
+
+        }
+
+        public ProductModel Find(int id)
+        {
+            return Products.FirstOrDefault(x => x.Id == id);
+        }
+
+        public bool CheckExistProduct(int id)
+        {
+           return Products.Any(x => x.Id == id);
+        }
+        public bool CheckNameProduct(string name)
+        {
+            return ProductsLists.Products.Any(x => x.Name.ToLower() == name.ToLower());
         }
     }
+
 }
+

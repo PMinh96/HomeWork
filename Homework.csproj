@@ -13,4 +13,8 @@
     <None Remove="Repositories\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\Helpers\" />
+  </ItemGroup>
+
 </Project>
