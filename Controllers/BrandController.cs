@@ -3,7 +3,9 @@ using Homework.Common.Utils;
 using Homework.Models;
 using Homework.Services.Implements;
 using Homework.Services.Interfaces;
+using System.Security.Cryptography;
 using static Homework.Common.Utils.AppUtlis;
+
 
 
 namespace Homework.Common.Helpers
@@ -13,9 +15,7 @@ namespace Homework.Common.Helpers
         public static void Run()
         {
             AppUtlis.PrintSeparator();
-            Console.WriteLine("1. Thêm");
-            Console.WriteLine("2. Sửa");
-            Console.WriteLine("2. Xóa");
+            AppUtlis.PrintOptionBrand();
             var option = GetValueFromKeyboard("Nhap lua chon: ");
             int optionConverted = Convert.ToInt32(option);
             BrandService brandService = new BrandService();
@@ -23,29 +23,42 @@ namespace Homework.Common.Helpers
             switch (optionConverted)
             {
                 case 1:
-
-
                     var id = 0;
-                    do
-                    {
-                        id = ConvertValueTo(GetValueFromKeyboard("enter  id"));
-                    }
-                    while (brandService.CheckExistBrand(id) || id <= 0);
                     string name = "";
-                    do
-                    {
-                        name = GetValueFromKeyboard("Enter Name");
+                    id = ConvertValueTo(GetValueFromKeyboard("Enter Brand ID"));
+                    AppUtlis.RepeatConditionBrand(id);
 
-                    } while ((brandService.CheckNameBrand(name) && !string.IsNullOrEmpty(name)) == false || string.IsNullOrEmpty(name) == false);
+                    name = GetValueFromKeyboard("Enter Brand ID");
+                    AppUtlis.RepeatConditionBrand(name);
 
                     brandService.InsertBrand(new BrandModel(id, name));
-
-
-
-
                     break;
                 case 2:
-                    AppUtlis.PrintSeparator();
+                    var idDelete = ConvertValueTo(GetValueFromKeyboard("Enter Brand ID Delete "));
+
+                    var found = brandService.Find(idDelete);
+                    if (found != null)
+                    {
+                        brandService.DeleteBrand(found);
+                    }
+                    else
+                    {
+                        Console.WriteLine("sai");
+                    }
+                    break;
+                case 3:
+                    var idUpdate = ConvertValueTo(GetValueFromKeyboard("ID Product Update"));
+
+                    var found1 = brands.Find(idUpdate);
+                    if (found1 != null)
+                    {
+                        productService.DeleteProduct(found1);
+                    }
+                    else
+                    {
+                        Console.WriteLine("sai");
+                    }
+                    break;
                     break;
                 default:
                     AppUtlis.PrintSeparator();

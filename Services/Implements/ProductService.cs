@@ -5,6 +5,7 @@ using static Homework.Data.BrandList;
 using Homework.Models;
 using Homework.Dto;
 using Homework.Data;
+using System.Collections.Immutable;
 
 namespace Homework.Services.Implements
 {
@@ -26,13 +27,13 @@ namespace Homework.Services.Implements
             };
 
         }
-        //public List<ProductModel> SingleComperator(string Operator, decimal price, decimal pricel)
-        //{
-        //    return Operator switch
-        //    {
-        //        "lgt" => Products.Where(x => x.Price > price && x.Price <= pricel).ToList(),
-        //    };
-        //}
+        public List<ProductModel> SingleComperator1(string Operator, decimal price, decimal pricel)
+        {
+            return Operator switch
+            {
+                "lgt" => Products.Where(x => x.Price > price && x.Price <= pricel).ToList(),
+            };
+        }
 
         public void FindProviso()
         {
@@ -77,7 +78,7 @@ namespace Homework.Services.Implements
         {
             Products.Add(product);
 
-            return Find(product.Id) != null;
+            return Find(product.Id) == null;
         }
 
         public bool DeleteProduct(ProductModel product)
@@ -88,23 +89,27 @@ namespace Homework.Services.Implements
 
         }
 
-        public bool UpdateProduct(ProductModel product)
+        public void UpdateProduct(int id, string name, decimal price, int brandId)
         {
-            var found = Find(product.Id);
-            if (found == null)
-            {
-                return false;
-            }
-            else
-            {
-                found.Price = product.Price;
-                if (product.Price == found.Price)
-                {
-                    return true;
-                }
-                else { return false; }
-            }
+            //var found = Find(id);
+            //if (found == null)
+            //{
+            //    Console.WriteLine("Not ");
+            //}
+            //else
+            //{
+            //    var getNameUpdateProduct = found.Name == name;
+            //    var getPriceUpdateProduct = found.Price == price;
+            //    var getBrandUpdateProduct = found.BrandId == brandId;
+            //}
 
+            var users = from p in Products
+                        where p.Id == id
+                        select new
+                        {
+            
+
+                        };
         }
 
         public ProductModel Find(int id)
@@ -114,11 +119,11 @@ namespace Homework.Services.Implements
 
         public bool CheckExistProduct(int id)
         {
-           return Products.Any(x => x.Id == id);
+            return Products.Any(x => x.Id == id);
         }
         public bool CheckNameProduct(string name)
         {
-            return ProductsLists.Products.Any(x => x.Name.ToLower() == name.ToLower());
+            return ProductsLists.Products.Any(x => x.Name.ToLower() != name.ToLower());
         }
     }
 

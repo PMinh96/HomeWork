@@ -3,7 +3,6 @@ using Homework.Common.Utils;
 using Homework.Models;
 using Homework.Services.Implements;
 using Homework.Services.Interfaces;
-using System.Xml.Serialization;
 using static Homework.Common.Utils.AppUtlis;
 namespace Homework.Common.Helpers;
 
@@ -11,32 +10,26 @@ public static class ProductController
 {
     public static void Run()
     {
-
         AppUtlis.PrintSeparator();
         AppUtlis.PrintOption();
-       
-        var option = GetValueFromKeyboard("Nhap lua chon: ");
-
-
-        int optionConverted = Convert.ToInt32(option);
 
         ProductService productService = new ProductService();
         var products = new List<ProductModel>();
+
         BrandService brandService = new BrandService();
         var brands = new List<BrandModel>();
 
+        var option = GetValueFromKeyboard("Nhap lua chon: ");
+        int optionConverted = Convert.ToInt32(option);
         switch (optionConverted)
         {
             case 1:
                 var value = GetValueFromKeyboard("nhập: ");
                 var valueArr = value.Split(",");
                 var value01 = decimal.Parse(valueArr[1]);
-                //var value02 = decimal.Parse(valueArr[2]);
 
                 AppUtlis.PrintSeparator();
                 products = productService.SingleComperator(valueArr[0], value01);
-                //products = productService.SingleComperator(valueArr[0], value01, value02);
-
                 productService.PrintInfo(products);
                 break;
 
@@ -44,7 +37,6 @@ public static class ProductController
                 AppUtlis.PrintSeparator();
                 products = productService.OrderByProducts(true);
                 productService.PrintInfo(products);
-
                 break;
 
             case 3:
@@ -68,65 +60,81 @@ public static class ProductController
                     Console.WriteLine($"Name: {item.Name} Count: {item.Count}");
                 }
                 break;
+
             case 5:
                 AppUtlis.PrintSeparator();
-                string name = null;
+                string _name = "";
                 var id = 0;
-                do
-                {
-                     name = GetValueFromKeyboard("enter name product");
-                }
-                while (productService.CheckNameProduct(name) ||  name == null);
-                
-                do
-                {
-                    id = ConvertValueTo(GetValueFromKeyboard("enter  id"));
-                }
-                while (productService.CheckExistProduct(id) || id <= 0);
 
-                var price = ConvertValueTo(GetValueFromKeyboard("enter price"));
+                _name = GetValueFromKeyboard("Enter Product Name");
+                AppUtlis.RepeatConditionProduct(_name);
+                id = ConvertValueTo(GetValueFromKeyboard("Enter Product ID"));
+                AppUtlis.RepeatConditionProduct(id);
 
-
+                var price = ConvertValueTo(GetValueFromKeyboard("Enter Product Price"));
 
                 //chọn thêm mới hoặc chọn cũ
                 var choice = ConvertValueTo(GetValueFromKeyboard("Select key: 1. dùng có sẵn  2. thêm mới brand")); ;
                 var brand = 0;
+                string nameBrand = "";
+                var _id = 0;
                 switch (choice)
                 {
                     case 1:
                         brand = ConvertValueTo(GetValueFromKeyboard("Brand 1.SamSung 2.Iphone 3.Nokia"));
-                        productService.InsertProduct(new ProductModel(id, name, price, brand));
+                        productService.InsertProduct(new ProductModel(id, _name, price, brand));
                         break;
+
                     case 2:
-                        var _id = 0;
-                        do
-                        {
-                            id = ConvertValueTo(GetValueFromKeyboard("enter  id brand"));
-                        }
-                        while (brandService.CheckExistBrand(id) || id <= 0);
-                        string _name = "";
-                        do
-                        {
-                            name = GetValueFromKeyboard("Enter Name brand");
+                        _id = ConvertValueTo(GetValueFromKeyboard("Enter Brand ID"));
+                        AppUtlis.RepeatConditionBrand(id);
 
-                        } while ((brandService.CheckNameBrand(_name) && !string.IsNullOrEmpty(_name)) == false || string.IsNullOrEmpty(_name) == false);
+                        nameBrand = GetValueFromKeyboard("Enter Brand ID");
+                        AppUtlis.RepeatConditionBrand(nameBrand);
 
-                        brandService.InsertBrand(new BrandModel(id, name));
-                        productService.InsertProduct(new ProductModel(id, name, price, _id));
+                        brandService.InsertBrand(new BrandModel(_id, nameBrand));
                         break;
                 }
-
-                
-
                 break;
+
             case 6:
                 AppUtlis.PrintSeparator();
-                var idDelete = ConvertValueTo(GetValueFromKeyboard("enter  id delete: "));
+                var idDelete = ConvertValueTo(GetValueFromKeyboard("Enter Product ID Delete "));
 
                 var found = productService.Find(idDelete);
                 if (found != null)
                 {
                     productService.DeleteProduct(found);
+                }
+                else
+                {
+                    Console.WriteLine("sai");
+                }
+                break;
+
+            case 7:
+                var valueLg = GetValueFromKeyboard("Price lgt,Fromt,to ");
+                var valueArr1 = valueLg.Split(",");
+                var valueLg01 = decimal.Parse(valueArr1[1]);
+                var valueLg02 = decimal.Parse(valueArr1[2]);
+
+                AppUtlis.PrintSeparator();
+                products = productService.SingleComperator1(valueArr1[0], valueLg01, valueLg02);
+                productService.PrintInfo(products);
+                break;
+
+            case 8:
+                var idUpdate = ConvertValueTo(GetValueFromKeyboard("ID Product Update"));
+                
+                if (idUpdate != null)
+                {
+                    var getnameUpdate = GetValueFromKeyboard("Updata Name");
+                    
+                    var getPriceUpdate = ConvertValueTodecimal(GetValueFromKeyboard("Update Price"));
+
+                    var getBrandIDUpdate = ConvertValueTo(GetValueFromKeyboard("Updata BrandID"));
+
+                    productService.UpdateProduct(idUpdate, getnameUpdate, getPriceUpdate, getBrandIDUpdate);
                 }
                 else
                 {

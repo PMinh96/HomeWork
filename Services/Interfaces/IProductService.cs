@@ -13,8 +13,7 @@ namespace Homework.Services.Interfaces
         List<Productdto> SumProducts(decimal Operator, decimal price);
 
         List<ProductModel> SingleComperator(string Operator, decimal price);
-        //List<ProductModel> SingleComperator(string Operator, decimal price, decimal pricel);
-
+   
         void FindProviso();
 
         // định nghĩa list sắp xếp
@@ -23,7 +22,7 @@ namespace Homework.Services.Interfaces
 
         bool InsertProduct(ProductModel product);
         bool DeleteProduct(ProductModel product);
-        bool UpdateProduct(ProductModel product);
+        bool UpdateProduct(int id, string name, decimal price, int brandId);
 
         ProductModel Find(int id);
         bool CheckExistProduct(int id);
