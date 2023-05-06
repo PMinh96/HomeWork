@@ -1,4 +1,5 @@
 ﻿using Homework.Common.Helpers;
+using Homework.Data;
 using static Homework.Common.Utils.AppUtils;
 
 namespace Homework
@@ -7,39 +8,43 @@ namespace Homework
     {
         public static void Main(string[] args)
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-
-            int initProgram;
-            do
+            foreach (var item in BrandData.Brands)
             {
-                DisplayAppOptions();
+                Console.WriteLine(item.Id);
+            }
+            //Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-                initProgram = ConvertValueTo(GetValueFromKeyboard());
+            //int initProgram;
+            //do
+            //{
+            //    DisplayAppOptions();
 
-                switch (initProgram)
-                {
-                    case 1:
-                        ProductController.Run();
-                        break;
+            //    initProgram = ConvertValueTo(GetValueFromKeyboard());
 
-                    case 2:
-                        BrandController.Run();
-                        break;
+            //    switch (initProgram)
+            //    {
+            //        case 1:
+            //            ProductController.Run();
+            //            break;
 
-                    case 3:
-                        var option = GetValueFromKeyboard("Nhấn Y để đóng hoặc hoặc phím bất ký để nhập lại");
+            //        case 2:
+            //            BrandController.Run();
+            //            break;
 
-                        if (option.ToLower() == "y")
-                        {
-                            initProgram = 0;
-                        }
-                        break;
+            //        case 3:
+            //            var option = GetValueFromKeyboard("Nhấn Y để đóng hoặc hoặc phím bất ký để nhập lại");
 
-                    default:
-                        Console.WriteLine("Vui long lua chon lai");
-                        break;
-                }
-            } while (initProgram != 0);
+            //            if (option.ToLower() == "y")
+            //            {
+            //                initProgram = 0;
+            //            }
+            //            break;
+
+            //        default:
+            //            Console.WriteLine("Vui long lua chon lai");
+            //            break;
+            //    }
+            //} while (initProgram != 0);
         }
 
         private static void DisplayAppOptions()

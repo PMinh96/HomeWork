@@ -1,5 +1,5 @@
 ﻿using Homework.Data;
-using static Homework.Data.BrandList;
+using static Homework.Data.BrandData;
 using Homework.Models;
 using Homework.Services.Interfaces;
 
@@ -41,7 +41,7 @@ namespace Homework.Services.Implements
 
         public bool CheckExistBrand(int id)
         {
-            return BrandList.Brands.Any(x => x.Id == id);
+            return BrandData.Brands.Any(x => x.Id == id);
         }
 
         public BrandModel Find(int id)
@@ -51,7 +51,7 @@ namespace Homework.Services.Implements
 
         public bool CheckNameBrand(string name)
         {
-            return BrandList.Brands.Any(x=>x.Name.ToLower() != name.ToLower());
+            return BrandData.Brands.Any(x=>x.Name.ToLower() != name.ToLower());
         }
     }
 }
