@@ -1,20 +1,21 @@
-﻿
-
-using Homework.Common.Constants;
+﻿using Homework.Common.Constants;
 using Homework.Models;
 using Homework.Services.Implements;
-using Homework.Services.Interfaces;
-using System.Security.Cryptography;
-
 
 namespace Homework.Common.Utils
 {
-
-    public static class AppUtlis
+    public static class AppUtils
     {
-        public static string GetValueFromKeyboard(string message)
+        public static string GetValueFromKeyboard(string message = "")
         {
-            Console.WriteLine(message);
+            if (string.IsNullOrEmpty(message))
+            {
+                Console.WriteLine("Nhap lua chon: ");
+            }
+            else
+            {
+                Console.WriteLine(message);
+            }
             return Console.ReadLine() ?? string.Empty;
         }
 
@@ -22,7 +23,8 @@ namespace Homework.Common.Utils
         {
             return int.TryParse(value, out var output) ? output : 0;
         }
-        public static decimal ConvertValueTodecimal(string value)
+
+        public static decimal ConvertValueToDecimal(string value)
         {
             return decimal.TryParse(value, out var output) ? output : 0;
         }
@@ -31,6 +33,7 @@ namespace Homework.Common.Utils
         {
             Console.WriteLine("===================================================================");
         }
+
         public static void PrintOption()
         {
             var count = 1;
@@ -57,7 +60,6 @@ namespace Homework.Common.Utils
         {
             ProductService productService = new ProductService();
 
-
             while ((productService.CheckNameProduct(name) && string.IsNullOrEmpty(name)) == true || string.IsNullOrEmpty(name) == true)
             {
                 name = GetValueFromKeyboard("re-enter name");
@@ -67,7 +69,6 @@ namespace Homework.Common.Utils
         public static void RepeatConditionProduct(int id)
         {
             ProductService productService = new ProductService();
-
 
             while (productService.CheckExistProduct(id) || id <= 0)
             {
@@ -94,6 +95,5 @@ namespace Homework.Common.Utils
                 name = GetValueFromKeyboard("Enter Name brand");
             }
         }
-
     }
 }

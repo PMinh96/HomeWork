@@ -3,15 +3,15 @@ using Homework.Common.Utils;
 using Homework.Models;
 using Homework.Services.Implements;
 using Homework.Services.Interfaces;
-using static Homework.Common.Utils.AppUtlis;
+using static Homework.Common.Utils.AppUtils;
 namespace Homework.Common.Helpers;
 
 public static class ProductController
 {
     public static void Run()
     {
-        AppUtlis.PrintSeparator();
-        AppUtlis.PrintOption();
+        AppUtils.PrintSeparator();
+        AppUtils.PrintOption();
 
         ProductService productService = new ProductService();
         var products = new List<ProductModel>();
@@ -19,7 +19,7 @@ public static class ProductController
         BrandService brandService = new BrandService();
         var brands = new List<BrandModel>();
 
-        var option = GetValueFromKeyboard("Nhap lua chon: ");
+        var option = GetValueFromKeyboard();
         int optionConverted = Convert.ToInt32(option);
         switch (optionConverted)
         {
@@ -28,32 +28,32 @@ public static class ProductController
                 var valueArr = value.Split(",");
                 var value01 = decimal.Parse(valueArr[1]);
 
-                AppUtlis.PrintSeparator();
+                AppUtils.PrintSeparator();
                 products = productService.SingleComperator(valueArr[0], value01);
                 productService.PrintInfo(products);
                 break;
 
             case 2:
-                AppUtlis.PrintSeparator();
+                AppUtils.PrintSeparator();
                 products = productService.OrderByProducts(true);
                 productService.PrintInfo(products);
                 break;
 
             case 3:
-                AppUtlis.PrintSeparator();
+                AppUtils.PrintSeparator();
                 products = productService.OrderByProducts(false);
                 productService.PrintInfo(products);
                 break;
 
             case 4:
-                AppUtlis.PrintSeparator();
+                AppUtils.PrintSeparator();
                 var valueS = GetValueFromKeyboard("nhập1:  ");
                 var value1 = decimal.Parse(valueS);
                 var value2 = GetValueFromKeyboard(" nhập số 2: ");
                 var valueX = decimal.Parse(value2);
 
 
-                AppUtlis.PrintSeparator();
+                AppUtils.PrintSeparator();
                 var Sumproducts = productService.SumProducts(value1, valueX);
                 foreach (var item in Sumproducts)
                 {
@@ -62,14 +62,14 @@ public static class ProductController
                 break;
 
             case 5:
-                AppUtlis.PrintSeparator();
+                AppUtils.PrintSeparator();
                 string _name = "";
                 var id = 0;
 
                 _name = GetValueFromKeyboard("Enter Product Name");
-                AppUtlis.RepeatConditionProduct(_name);
+                AppUtils.RepeatConditionProduct(_name);
                 id = ConvertValueTo(GetValueFromKeyboard("Enter Product ID"));
-                AppUtlis.RepeatConditionProduct(id);
+                AppUtils.RepeatConditionProduct(id);
 
                 var price = ConvertValueTo(GetValueFromKeyboard("Enter Product Price"));
 
@@ -87,10 +87,10 @@ public static class ProductController
 
                     case 2:
                         _id = ConvertValueTo(GetValueFromKeyboard("Enter Brand ID"));
-                        AppUtlis.RepeatConditionBrand(id);
+                        AppUtils.RepeatConditionBrand(id);
 
                         nameBrand = GetValueFromKeyboard("Enter Brand ID");
-                        AppUtlis.RepeatConditionBrand(nameBrand);
+                        AppUtils.RepeatConditionBrand(nameBrand);
 
                         brandService.InsertBrand(new BrandModel(_id, nameBrand));
                         break;
@@ -98,7 +98,7 @@ public static class ProductController
                 break;
 
             case 6:
-                AppUtlis.PrintSeparator();
+                AppUtils.PrintSeparator();
                 var idDelete = ConvertValueTo(GetValueFromKeyboard("Enter Product ID Delete "));
 
                 var found = productService.Find(idDelete);
@@ -118,7 +118,7 @@ public static class ProductController
                 var valueLg01 = decimal.Parse(valueArr1[1]);
                 var valueLg02 = decimal.Parse(valueArr1[2]);
 
-                AppUtlis.PrintSeparator();
+                AppUtils.PrintSeparator();
                 products = productService.SingleComperator1(valueArr1[0], valueLg01, valueLg02);
                 productService.PrintInfo(products);
                 break;
@@ -130,7 +130,7 @@ public static class ProductController
                 {
                     var getnameUpdate = GetValueFromKeyboard("Updata Name");
 
-                    var getPriceUpdate = ConvertValueTodecimal(GetValueFromKeyboard("Update Price"));
+                    var getPriceUpdate = ConvertValueToDecimal(GetValueFromKeyboard("Update Price"));
 
                     var getBrandIDUpdate = ConvertValueTo(GetValueFromKeyboard("Updata BrandID"));
 
@@ -143,7 +143,7 @@ public static class ProductController
                 break;
 
             default:
-                AppUtlis.PrintSeparator();
+                AppUtils.PrintSeparator();
                 break;
         }
     }

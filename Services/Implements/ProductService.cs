@@ -89,7 +89,7 @@ namespace Homework.Services.Implements
 
         }
 
-        bool UpdateProduct(int id, string name, decimal price, int brandId)
+        public bool UpdateProduct(int id, string name, decimal price, int brandId)
         {
             var findProduct = Find(id);
             if (findProduct == null) return false;
