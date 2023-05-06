@@ -89,27 +89,24 @@ namespace Homework.Services.Implements
 
         }
 
-        public void UpdateProduct(int id, string name, decimal price, int brandId)
+        bool UpdateProduct(int id, string name, decimal price, int brandId)
         {
-            //var found = Find(id);
-            //if (found == null)
-            //{
-            //    Console.WriteLine("Not ");
-            //}
-            //else
-            //{
-            //    var getNameUpdateProduct = found.Name == name;
-            //    var getPriceUpdateProduct = found.Price == price;
-            //    var getBrandUpdateProduct = found.BrandId == brandId;
-            //}
+            var findProduct = Find(id);
+            if (findProduct == null) return false;
 
-            var users = from p in Products
-                        where p.Id == id
-                        select new
-                        {
-            
-
-                        };
+            if (!string.IsNullOrEmpty(name))
+            {
+                findProduct.Name = name;
+            }
+            if (!string.IsNullOrEmpty(price.ToString()))
+            {
+                findProduct.Price = price;
+            }
+            if (!string.IsNullOrEmpty(brandId.ToString()))
+            {
+                findProduct.BrandId = brandId;
+            }
+            return true;
         }
 
         public ProductModel Find(int id)
@@ -125,6 +122,7 @@ namespace Homework.Services.Implements
         {
             return ProductsLists.Products.Any(x => x.Name.ToLower() != name.ToLower());
         }
+
     }
 
 }

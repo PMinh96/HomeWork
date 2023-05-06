@@ -125,11 +125,11 @@ public static class ProductController
 
             case 8:
                 var idUpdate = ConvertValueTo(GetValueFromKeyboard("ID Product Update"));
-                
+
                 if (idUpdate != null)
                 {
                     var getnameUpdate = GetValueFromKeyboard("Updata Name");
-                    
+
                     var getPriceUpdate = ConvertValueTodecimal(GetValueFromKeyboard("Update Price"));
 
                     var getBrandIDUpdate = ConvertValueTo(GetValueFromKeyboard("Updata BrandID"));

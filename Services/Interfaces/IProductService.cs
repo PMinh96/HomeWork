@@ -21,7 +21,11 @@ namespace Homework.Services.Interfaces
 
 
         bool InsertProduct(ProductModel product);
+
         bool DeleteProduct(ProductModel product);
+
+        /// <param name="id"></param>
+        /// <returns></returns>
         bool UpdateProduct(int id, string name, decimal price, int brandId);
 
         ProductModel Find(int id);
