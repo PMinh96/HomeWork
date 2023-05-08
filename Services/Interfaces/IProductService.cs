@@ -10,7 +10,7 @@ namespace Homework.Services.Interfaces
         void PrintInfo(List<ProductModel> products);
 
         // đếm hàng theo hãng 
-        List<Productdto> SumProducts(decimal Operator, decimal price);
+        List<ProductDto> SumProducts(decimal Operator, decimal price);
 
         List<ProductModel> SingleComperator(string Operator, decimal price);
    

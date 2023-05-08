@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Homework.Models;
 
 namespace Homework.Dto
 {
-    internal class MappingWareHouseProductdto
+    public class MappingWareHouseProductDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
 
-        public string WareHouse { get; set; }
+        public List<BrandModel> Brands { get; set; }
+    }
 
-        public int Quantity { get; set; }
+    public class MappingWareHouseProduct2Dto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
 
+        public List<BrandDto> Brands { get; set; }
     }
 }

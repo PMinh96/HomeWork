@@ -40,7 +40,7 @@ namespace Homework.Data
                     Id = 5,
                     Name = "SamSung A3",
                     Price = 75000,
-                    BrandId = 2
+                    BrandId = 1
                 },
                 new ProductModel()
                 {

@@ -61,12 +61,12 @@ namespace Homework.Services.Implements
             }
         }
 
-        public List<Productdto> SumProducts(decimal Operator, decimal price)
+        public List<ProductDto> SumProducts(decimal Operator, decimal price)
         {
             var result = from p in Products
                          where p.Price >= Operator && p.Price <= price
                          group p by p.Name into g
-                         select new Productdto
+                         select new ProductDto()
                          {
                              Name = g.Key,
                              Count = g.Count()

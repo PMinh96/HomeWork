@@ -8,13 +8,12 @@
         {
         }
 
-        public Mapping_WareHouse_ProductModel(int id, int idWarehouse, int brand, int quantity)
+        public Mapping_WareHouse_ProductModel(int id, int idWarehouse, int productId, int quantity)
         {
             Id = id;
-            IdBrand = brand;
+            IdProduct = productId;
             IdWarehouse = idWarehouse;
             Quantity = quantity;
-          
         }
 
         #endregion Ctor
@@ -23,11 +22,8 @@
 
         public int IdWarehouse { get; set; }
 
-        public int IdBrand { get; set; }
-         
+        public int IdProduct { get; set; }
 
         public int Quantity { get; set; }
-
-        
     }
 }
