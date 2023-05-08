@@ -1,26 +1,33 @@
 ﻿namespace Homework.Models
 {
-    public class Mapping_WareHouse_Product
+    public class Mapping_WareHouse_ProductModel
     {
         #region Ctor
 
-        public Mapping_WareHouse_Product()
+        public Mapping_WareHouse_ProductModel()
         {
         }
 
-        public Mapping_WareHouse_Product(int id, int idWarehouse, int idProduct, int quantity)
+        public Mapping_WareHouse_ProductModel(int id, int idWarehouse, int brand, int quantity)
         {
             Id = id;
-            IdProduct = idProduct;
+            IdBrand = brand;
             IdWarehouse = idWarehouse;
             Quantity = quantity;
+          
         }
 
         #endregion Ctor
 
         public int Id { get; set; }
+
         public int IdWarehouse { get; set; }
-        public int IdProduct { get; set; }
+
+        public int IdBrand { get; set; }
+         
+
         public int Quantity { get; set; }
+
+        
     }
 }
